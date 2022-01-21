@@ -1,4 +1,4 @@
-package com.newliving.backend.nutzer.login.request;
+package com.newliving.backend.eintrag.request;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class LoginDatenRequest {
-    private final String email;
-    private final String passwort;
+public class CreateUpdateEintragRequest {
+    private final String text;
+    private final String datum;
 }
