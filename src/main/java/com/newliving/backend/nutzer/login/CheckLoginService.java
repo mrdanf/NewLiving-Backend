@@ -1,4 +1,4 @@
 package com.newliving.backend.nutzer.login;
 
-public class LoggedInService {
+public class CheckLoginService {
 }

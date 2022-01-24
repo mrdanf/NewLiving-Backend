@@ -15,34 +15,34 @@ public class EintragController {
 
     @GetMapping("")
     public List<Eintrag> getAllEintrag(@CookieValue(name = "JSESSIONID") String cookieId) {
-        return eintragService.getAllEintrag(cookieId);
+        return eintragService.getAll(cookieId);
     }
 
     @GetMapping("/id/{id}")
     public Eintrag getEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
-        return eintragService.getEintrag(cookieId, id);
+        return eintragService.getOne(cookieId, id);
     }
 
     @PostMapping("/neu")
     public boolean createEintrag(@CookieValue(name = "JSESSIONID") String cookieId,
                                  @RequestBody CreateUpdateEintragRequest request) {
-        return eintragService.createEintrag(cookieId, request);
+        return eintragService.create(cookieId, request);
     }
 
     @PutMapping("/id/{id}/erledigt")
     public boolean switchEintragErledigt(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
-        return eintragService.switchEintragErledigt(cookieId, id);
+        return eintragService.switchErledigt(cookieId, id);
     }
 
     @PutMapping("/id/{id}/update")
     public boolean updateEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id,
                                  @RequestBody CreateUpdateEintragRequest request) {
-        return eintragService.updateEintrag(cookieId, id, request);
+        return eintragService.update(cookieId, id, request);
     }
 
     @DeleteMapping("/id/{id}/löschen")
     public boolean deleteEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
-        return eintragService.deleteEintrag(cookieId, id);
+        return eintragService.delete(cookieId, id);
     }
 
 }
