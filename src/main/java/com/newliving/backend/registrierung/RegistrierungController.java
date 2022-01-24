@@ -1,4 +1,4 @@
-package com.newliving.backend.nutzer.registrierung;
+package com.newliving.backend.registrierung;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,7 @@ public class RegistrierungController {
 
     @PostMapping("")
     public boolean register(@RequestBody RegistrierungRequest request) {
-        String token = registrierungService.register(request);
-
-        return token != null;
+        return registrierungService.register(request);
     }
 
     @GetMapping("/passwort-vergessen")
