@@ -18,4 +18,11 @@ public interface NutzerRepository extends JpaRepository<Nutzer, Long> {
     @Modifying
     @Query("UPDATE Nutzer n SET n.passwort = ?2 WHERE n.id = ?1")
     void updatePasswortById(Long id, String passwort);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Nutzer n SET n.cookieId = ?2 WHERE n.id = ?1")
+    void updateCookieById(Long id, String cookie);
+
+    Optional<Nutzer> findNutzerByCookieId(String cookieId);
 }

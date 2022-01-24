@@ -43,4 +43,19 @@ public class NutzerService {
 
         throw new IllegalStateException("User existiert nicht.");
     }
+
+    public void setCookie(Long id, String cookie) {
+        nutzerRepository.updateCookieById(id, cookie);
+    }
+
+    public Nutzer getNutzerByCookie(String cookieId) {
+        return nutzerRepository.findNutzerByCookieId(cookieId).get();
+    }
+
+    public boolean deleteCookie(String cookieId) {
+        Nutzer nutzer = getNutzerByCookie(cookieId);
+        nutzer.setCookieId(null);
+        nutzerRepository.save(nutzer);
+        return true;
+    }
 }

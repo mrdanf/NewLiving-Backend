@@ -24,7 +24,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Bestätigung Ihrer Registrierung");
+            helper.setSubject("Info von NewLiving");
             helper.setFrom("info@newliving.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {

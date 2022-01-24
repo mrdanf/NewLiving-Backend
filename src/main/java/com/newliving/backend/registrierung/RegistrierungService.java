@@ -4,9 +4,8 @@ import com.newliving.backend.email.EmailService;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -33,7 +32,7 @@ public class RegistrierungService {
 
     public boolean resetPasswort(String email) {
         Nutzer nutzer = nutzerService.getNutzer(email);
-        String tempPasswort = createRandomPasswort(nutzer);
+        String tempPasswort = createRandomPasswort();
         nutzer.setPasswort(tempPasswort);
         nutzerService.resetPasswort(nutzer);
         emailService.send(nutzer.getEmail(), emailService.buildEmailPasswortReset(nutzer.getName(), tempPasswort));
@@ -41,9 +40,7 @@ public class RegistrierungService {
         return true;
     }
 
-    private String createRandomPasswort(Nutzer nutzer) {
-        String passwort = UUID.randomUUID().toString().replaceAll("-", "");
-
-        return nutzer.getName() + passwort;
+    private String createRandomPasswort() {
+        return RandomString.make(16);
     }
 }
