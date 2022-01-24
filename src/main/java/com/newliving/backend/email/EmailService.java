@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * Versendet vorgefertigte Emails an Nutzer nach Registrierung oder Passwort zurücksetzen.
+ */
 @Service
 @AllArgsConstructor
 public class EmailService {
@@ -18,6 +21,16 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
+    /**
+     * Baut eine MIME Email auf und versendet diese an den Nutzer.
+     *
+     * Baut eine MIME Email auf mit Subject "Info von NewLiving" und Absender "info@newliving.com". Die Email geht an
+     * die übergebene Email Adresse eines Nutzers. Der Inhalt der Email wird an anderer Stelle erstellt und dieser
+     * Methode übergeben.
+     *
+     * @param to Empfänger der Email
+     * @param email Inhalt der Email
+     */
     public void send(String to, String email) {
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -33,6 +46,12 @@ public class EmailService {
         }
     }
 
+    /**
+     * Baut eine Email zur Bestätigung einer Registrierung.
+     *
+     * @param name Der Name des Nutzers, der in der Email angesprochen werden soll
+     * @return Emailtext
+     */
     public String buildEmailRegistration(String name) {
         return  "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hallo " + name + ",</p>" +
                 "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Vielen Dank für ihre Registrierung.</p>" +
@@ -42,6 +61,13 @@ public class EmailService {
                 ;
     }
 
+    /**
+     * Baut eine Email mit einem neuen Passwort, nachdem der Nutzer sein Passwort zurückgesetzt hat.
+     *
+     * @param name Der Name des Nutzers, der in der Email angesprochen werden soll
+     * @param tempPassword Das neue Passwort
+     * @return Emailtext
+     */
     public String buildEmailPasswortReset(String name, String tempPassword) {
         return "<p>Hallo " + name + ",</p>" +
                 "<p> Sie haben die Zurücksetzung ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
