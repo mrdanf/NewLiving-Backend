@@ -6,6 +6,8 @@ import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class RegistrierungService {
@@ -27,5 +29,21 @@ public class RegistrierungService {
         }
 
         return status;
+    }
+
+    public boolean resetPasswort(String email) {
+        Nutzer nutzer = nutzerService.getNutzer(email);
+        String tempPasswort = createRandomPasswort(nutzer);
+        nutzer.setPasswort(tempPasswort);
+        nutzerService.resetPasswort(nutzer);
+        emailService.send(nutzer.getEmail(), emailService.buildEmailPasswortReset(nutzer.getName(), tempPasswort));
+
+        return true;
+    }
+
+    private String createRandomPasswort(Nutzer nutzer) {
+        String passwort = UUID.randomUUID().toString().replaceAll("-", "");
+
+        return nutzer.getName() + passwort;
     }
 }

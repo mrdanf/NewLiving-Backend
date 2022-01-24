@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class NutzerService {
@@ -27,5 +29,18 @@ public class NutzerService {
         nutzerRepository.save(nutzer);
 
         return true;
+    }
+
+    public void resetPasswort(Nutzer nutzer) {
+        nutzerRepository.updatePasswortById(nutzer.getId(), nutzer.getPasswort());
+    }
+
+    public Nutzer getNutzer(String email) {
+        Optional<Nutzer> nutzer = nutzerRepository.findByEmail(email);
+        if (nutzer.isPresent()) {
+            return nutzer.get();
+        }
+
+        throw new IllegalStateException("User existiert nicht.");
     }
 }

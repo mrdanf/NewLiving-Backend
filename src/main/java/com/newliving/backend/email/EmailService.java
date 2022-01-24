@@ -41,4 +41,12 @@ public class EmailService {
                 "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren.</p>"
                 ;
     }
+
+    public String buildEmailPasswortReset(String name, String tempPassword) {
+        return "<p>Hallo " + name + ",</p>" +
+                "<p> Sie haben die Zurücksetzung ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
+                "folgendes:</p>" +
+                "<p>Neues Passwort: " + tempPassword + " </p>" +
+                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>";
+    }
 }
