@@ -17,7 +17,7 @@ public class RegistrierungController {
      * Schnittstelle zur Erstellung eines neuen Accounts.
      *
      * @param request Request mit Registrierungsdaten: Email, Name, Passwort. Rest (Adresse und IBAN) ist optional
-     * @return true, wenn die Registrierung geklappt hat, ansonsten false
+     * @return true, wenn die Registrierung geklappt hat, sonst false
      */
     @PostMapping("")
     public boolean register(@RequestBody RegistrierungRequest request) {
@@ -28,7 +28,7 @@ public class RegistrierungController {
      * Schnittstelle zum Zurücksetzen des Passworts.
      *
      * @param email Email von dem dazugehörigen Account
-     * @return true, wenn die Email existiert und das Zurücksetzen geklappt hat, ansonsten exception
+     * @return true, wenn die Email existiert und das Zurücksetzen geklappt hat, sonst exception
      */
     @GetMapping("/passwort-vergessen")
     public boolean resetPasswort(@RequestParam String email) {

@@ -24,7 +24,7 @@ public class RegistrierungService {
      * Bestätigung versendet.
      *
      * @param request Request mit Registrierungsdaten: Email, Name, Passwort. Rest (Adresse und IBAN) ist optional
-     * @return true, wenn die Email nicht besetzt ist, ansonsten exception
+     * @return true, wenn die Email nicht besetzt ist, sonst exception
      */
     public boolean register(RegistrierungRequest request) {
         Nutzer nutzer;
@@ -47,7 +47,7 @@ public class RegistrierungService {
      *
      * @param email Email von dem dazugehörigen Account
      *
-     * @return true, wenn die Email existiert und das Zurücksetzen geklappt hat, ansonsten exception
+     * @return true, wenn die Email existiert und das Zurücksetzen geklappt hat, sonst exception
      */
     public boolean resetPasswort(String email) {
         Nutzer nutzer = nutzerService.getNutzer(email);
