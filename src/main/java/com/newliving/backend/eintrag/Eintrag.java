@@ -44,7 +44,11 @@ public class Eintrag {
         this(text, false, datum);
     }
 
-    public Eintrag(String text, Boolean vorgabe, String datum) {
+    public Eintrag(String text, Boolean vorgabe) {
+        this(text, vorgabe, null);
+    }
+
+    private Eintrag(String text, Boolean vorgabe, String datum) {
         this.text = text;
         this.erledigt = false;
         this.vorgabe = vorgabe;
