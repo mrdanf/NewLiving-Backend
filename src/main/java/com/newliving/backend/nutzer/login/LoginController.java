@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  * Schnittstellen für Login und Logout.
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api")
 @AllArgsConstructor
 public class LoginController {
 
