@@ -1,5 +1,6 @@
 package com.newliving.backend.eintrag;
 
+import com.newliving.backend.nutzer.Nutzer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class Eintrag {
     @Id
     @SequenceGenerator(name = "eintrag_sequence", sequenceName = "eintrag_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "eintrag_sequence")
+    @Column(name = "eintrag_id")
     private Long id;
 
     @Column(nullable = false)
@@ -29,6 +31,10 @@ public class Eintrag {
     private Boolean vorgabe;
 
     private String datum;
+
+    @ManyToOne
+    @JoinColumn(nullable = true, name = "nutzer_id")
+    private Nutzer nutzer;
 
     public Eintrag(String text) {
         this(text, false, null);

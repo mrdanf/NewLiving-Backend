@@ -18,6 +18,7 @@ public class Nutzer {
     @Id
     @SequenceGenerator(name = "nutzer_sequence", sequenceName = "nutzer_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "nutzer_sequence")
+    @Column(name = "nutzer_id")
     private Long id;
 
     @Column(nullable = false)
