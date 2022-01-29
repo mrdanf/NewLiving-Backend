@@ -1,6 +1,5 @@
 package com.newliving.backend.eintrag;
 
-import com.newliving.backend.eintrag.request.CreateOrUpdateEintragRequest;
 import com.newliving.backend.nutzer.Nutzer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

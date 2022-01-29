@@ -189,4 +189,13 @@ public class NutzerService {
         // Neue Email ist bereits vergeben
         return false;
     }
+
+    /**
+     * Speichert für andere Klassen eine Änderung am Nutzer und kapselt somit die Kommunikation mit NutzerRepository ab.
+     *
+     * @param nutzer Nutzer mit geänderten Daten, der abgespeichert werden soll
+     */
+    public void save(Nutzer nutzer) {
+        nutzerRepository.save(nutzer);
+    }
 }
