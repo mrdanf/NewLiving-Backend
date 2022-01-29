@@ -1,5 +1,6 @@
 package com.newliving.backend.eintrag;
 
+import com.newliving.backend.eintrag.request.CreateOrUpdateEintragRequest;
 import com.newliving.backend.nutzer.Nutzer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,5 +54,9 @@ public class Eintrag {
         this.erledigt = false;
         this.vorgabe = vorgabe;
         this.datum = datum;
+    }
+
+    public void switchErledigt() {
+        this.erledigt = !erledigt;
     }
 }

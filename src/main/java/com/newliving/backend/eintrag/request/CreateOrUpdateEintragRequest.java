@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class CreateUpdateEintragRequest {
+public class CreateOrUpdateEintragRequest {
     private final String text;
     private final String datum;
 }

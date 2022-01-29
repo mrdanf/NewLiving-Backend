@@ -1,6 +1,6 @@
 package com.newliving.backend.eintrag;
 
-import com.newliving.backend.eintrag.request.CreateUpdateEintragRequest;
+import com.newliving.backend.eintrag.request.CreateOrUpdateEintragRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +49,7 @@ public class EintragController {
      */
     @PostMapping("/neu")
     public boolean createEintrag(@CookieValue(name = "JSESSIONID") String cookieId,
-                                 @RequestBody CreateUpdateEintragRequest request) {
+                                 @RequestBody CreateOrUpdateEintragRequest request) {
         return eintragService.create(cookieId, request);
     }
 
@@ -58,7 +58,8 @@ public class EintragController {
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param id Id des Eintrags
-     * @return true wenn eingeloggt, sonst exception
+     * @return true wenn eingeloggt und Eintrag existiert, sonst exception wenn nicht eingeloggt oder false wenn
+     * nicht authentifiziert
      */
     @PutMapping("/id/{id}/erledigt")
     public boolean switchEintragErledigt(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
@@ -71,11 +72,12 @@ public class EintragController {
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param id Id des Eintrags
      * @param request Request: text, datum
-     * @return true wenn eingeloggt und Datum korrekt, sonst exception
+     * @return true wenn eingeloggt und Datum korrekt, sonst exception wenn nicht eingeloggt oder false wenn nicht
+     * authentifiziert
      */
     @PutMapping("/id/{id}/update")
     public boolean updateEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id,
-                                 @RequestBody CreateUpdateEintragRequest request) {
+                                 @RequestBody CreateOrUpdateEintragRequest request) {
         return eintragService.update(cookieId, id, request);
     }
 
@@ -84,7 +86,8 @@ public class EintragController {
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param id Id des Eintrags
-     * @return true wenn eingeloggt und Eintrag vorhanden, sonst exception
+     * @return true wenn eingeloggt und Eintrag vorhanden, sonst exception wenn nicht eingeloggt oder false wenn
+     * nicht authentifiziert
      */
     @DeleteMapping("/id/{id}/löschen")
     public boolean deleteEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
