@@ -32,6 +32,17 @@ public class EintragService {
     }
 
     /**
+     * Holt alle Einträge, die dem Nutzer gehören, zu wem der Link gehört.
+     *
+     * @param link_id Link vom zugehörigen Nutzer
+     * @return Liste von Einträgen wenn link_id korrekt, sonst exception
+     */
+    public List<Eintrag> getAllFriend(String link_id) {
+        Nutzer nutzer = nutzerService.getNutzerByLink(link_id);
+        return eintragRepository.findAllByNutzer(nutzer);
+    }
+
+    /**
      * Holt einen einzelnen Eintrag.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer

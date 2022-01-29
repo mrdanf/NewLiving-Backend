@@ -198,4 +198,8 @@ public class NutzerService {
     public void save(Nutzer nutzer) {
         nutzerRepository.save(nutzer);
     }
+
+    public Nutzer getNutzerByLink(String link_id) {
+        return nutzerRepository.findNutzerByLink(link_id).get();
+    }
 }

@@ -66,8 +66,11 @@ public class LinkController {
      * @param request Request: eintragId, name
      * @return true wenn Link und Eintrag existieren, sonst exception
      */
+    /* TODO
     @PostMapping("/id/{link_id}/eintrag")
     public boolean offerHelpEintrag(@PathVariable String link_id, @RequestBody OfferHelpRequest request) {
         return linkService.offerHelpEintrag(link_id, request);
     }
+
+     */
 }
