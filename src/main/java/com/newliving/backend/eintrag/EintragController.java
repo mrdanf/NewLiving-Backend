@@ -61,7 +61,7 @@ public class EintragController {
      * @return true wenn eingeloggt und Eintrag existiert, sonst exception wenn nicht eingeloggt oder false wenn
      * nicht authentifiziert
      */
-    @PutMapping("/id/{id}/erledigt")
+    @GetMapping("/id/{id}/erledigt")
     public boolean switchEintragErledigt(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
         return eintragService.switchErledigt(cookieId, id);
     }

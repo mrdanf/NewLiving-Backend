@@ -48,7 +48,7 @@ public class LinkController {
      * @param emails Liste von Emails, an welche die Einladung gesendet werden soll
      * @return true wenn eingeloggt, sonst exception
      */
-    @GetMapping("/teilen")
+    @PostMapping("/teilen")
     public boolean shareLink(@CookieValue(name = "JSESSIONID") String cookieId, JSONArray emails) {
         return linkService.share(cookieId, emails);
     }
