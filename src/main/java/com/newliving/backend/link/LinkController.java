@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Schnittstellen für Features mit Link. Darin sind Erstellen eines Links, deaktivieren oder teilen, und auch bei
+ * Erhalt des Links das Einsehen der Liste und Eintragen seines Namens.
+ */
 @RestController
 @RequestMapping("/api/link")
 @AllArgsConstructor

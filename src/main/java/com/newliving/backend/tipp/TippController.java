@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Schnittstelle um Tipps zu lesen.
+ */
 @RestController
 @RequestMapping("/api/tipp")
 @AllArgsConstructor

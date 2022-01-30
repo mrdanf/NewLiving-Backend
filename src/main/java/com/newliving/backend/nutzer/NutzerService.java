@@ -1,6 +1,5 @@
 package com.newliving.backend.nutzer;
 
-import com.newliving.backend.eintrag.EintragService;
 import com.newliving.backend.nutzer.request.UpdateDatenRequest;
 import com.newliving.backend.nutzer.request.UpdatePasswortRequest;
 import lombok.AllArgsConstructor;
