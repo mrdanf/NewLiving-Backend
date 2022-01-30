@@ -3,6 +3,9 @@ package com.newliving.backend.link;
 import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.eintrag.EintragService;
 import com.newliving.backend.email.EmailService;
+import com.newliving.backend.link.helfer.Helfer;
+import com.newliving.backend.link.helfer.HelferRepository;
+import com.newliving.backend.link.request.OfferHelpRequest;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
@@ -18,6 +21,7 @@ public class LinkService {
     private final NutzerService nutzerService;
     private final EintragService eintragService;
     private final EmailService emailService;
+    private final HelferRepository helferRepository;
 
     /**
      * Erstellt einen zufälligen Link, der auf die Planung des Nutzers verweist.
@@ -66,12 +70,25 @@ public class LinkService {
         return true;
     }
 
-
     private String createLink() {
         return RandomString.make(8);
     }
 
     public List<Eintrag> getAllEintragFriend(String link_id) {
         return eintragService.getAllFriend(link_id);
+    }
+
+    /**
+     * Trägt bei einem Eintrag einen Helfer ein.
+     *
+     * @param link_id Id vom Link, welcher auf die geteilte Planung verweist
+     * @param request Request: eintragId, name
+     * @return true wenn Link und Eintrag existieren, sonst exception
+     */
+    public boolean offerHelpEintrag(String link_id, OfferHelpRequest request) {
+        Eintrag eintrag = eintragService.getOneFriend(link_id, request.getEintragId());
+        Helfer helfer = new Helfer(request.getName(), eintrag);
+        helferRepository.save(helfer);
+        return true;
     }
 }

@@ -55,6 +55,17 @@ public class EintragService {
     }
 
     /**
+     * Holt einen Eintrag, der dem Nutzer gehört, zu wem der Link gehört.
+     *
+     * @param link_id Link vom zugehörigen Nutzer
+     * @return Eintrag wenn link_id korrekt, sonst exception
+     */
+    public Eintrag getOneFriend(String link_id, Long eintragId) {
+        Nutzer nutzer = nutzerService.getNutzerByLink(link_id);
+        return eintragRepository.findByNutzerAndId(nutzer, eintragId).get();
+    }
+
+    /**
      * Erstellt einen Eintrag und weist ihn der Liste des eingeloggten Nutzers zu.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
@@ -63,8 +74,7 @@ public class EintragService {
      */
     public boolean create(String cookieId, CreateOrUpdateEintragRequest request) {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
-        Eintrag eintrag = new Eintrag(request.getText(), request.getDatum());
-        eintrag.setNutzer(nutzer);
+        Eintrag eintrag = new Eintrag(request.getText(), request.getDatum(), nutzer);
         eintragRepository.save(eintrag);
         return true;
     }

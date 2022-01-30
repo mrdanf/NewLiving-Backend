@@ -36,23 +36,24 @@ public class Eintrag {
     @JoinColumn(nullable = true, name = "nutzer_id")
     private Nutzer nutzer;
 
-    public Eintrag(String text) {
-        this(text, false, null);
+    public Eintrag(String text, Nutzer nutzer) {
+        this(text, false, null, nutzer);
     }
 
-    public Eintrag(String text, String datum) {
-        this(text, false, datum);
+    public Eintrag(String text, String datum, Nutzer nutzer) {
+        this(text, false, datum, nutzer);
     }
 
-    public Eintrag(String text, Boolean vorgabe) {
-        this(text, vorgabe, null);
+    public Eintrag(String text, Boolean vorgabe, Nutzer nutzer) {
+        this(text, vorgabe, null, nutzer);
     }
 
-    private Eintrag(String text, Boolean vorgabe, String datum) {
+    private Eintrag(String text, Boolean vorgabe, String datum, Nutzer nutzer) {
         this.text = text;
         this.erledigt = false;
         this.vorgabe = vorgabe;
         this.datum = datum;
+        this.nutzer = nutzer;
     }
 
     public void switchErledigt() {

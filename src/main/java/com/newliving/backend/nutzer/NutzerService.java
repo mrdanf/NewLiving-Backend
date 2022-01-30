@@ -18,7 +18,6 @@ public class NutzerService {
 
     private final NutzerRepository nutzerRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final EintragService eintragService;
 
     /**
      * Überprüft Existenz von Nutzer und liefert ihn zurück.

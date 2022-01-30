@@ -48,21 +48,37 @@ public class StartDataConfig {
             List<Eintrag> eintrags = new ArrayList<>();
             eintrags.add(new Eintrag(
                     "Müllbeutel kaufen",
-                    true
+                    true,
+                    nutzers.get(0)
+            ));
+
+            eintrags.add(new Eintrag(
+                    "Müllbeutel kaufen",
+                    true,
+                    nutzers.get(1)
             ));
 
             eintrags.add(new Eintrag(
                     "Wickelpapier für Geschirr besorgen",
-                    true
+                    true,
+                    nutzers.get(0)
+            ));
+
+            eintrags.add(new Eintrag(
+                    "Wickelpapier für Geschirr besorgen",
+                    true,
+                    nutzers.get(1)
             ));
 
             eintrags.add(new Eintrag(
                     "Küche einpacken",
-                    "22.02.2022"
+                    "22.02.2022",
+                    nutzers.get(0)
             ));
 
             eintrags.add(new Eintrag(
-                    "Keller aufräumen"
+                    "Keller aufräumen",
+                    nutzers.get(0)
             ));
 
 

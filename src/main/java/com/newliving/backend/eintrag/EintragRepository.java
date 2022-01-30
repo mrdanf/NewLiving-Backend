@@ -14,6 +14,8 @@ public interface EintragRepository extends JpaRepository<Eintrag, Long> {
 
     List<Eintrag> findAllByNutzer(Nutzer nutzer);
 
+    Optional<Eintrag> findByNutzerAndId(Nutzer nutzer, Long id);
+
     Optional<Eintrag> findEintragByIdAndNutzer(Long id, Nutzer nutzer);
 
 }
