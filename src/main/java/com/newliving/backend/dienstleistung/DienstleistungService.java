@@ -7,12 +7,9 @@ import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import com.newliving.backend.nutzer.login.CheckLoginService;
 import lombok.AllArgsConstructor;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Zuständig für das Holen aller Dienstleistungen, Sortieren und Filtern und auch buchen.
