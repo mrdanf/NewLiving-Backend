@@ -3,6 +3,7 @@ package com.newliving.backend.link;
 import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.link.request.OfferHelpRequest;
 import lombok.AllArgsConstructor;
+import net.minidev.json.JSONArray;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class LinkController {
      * @return true wenn eingeloggt, sonst exception
      */
     @GetMapping("/teilen")
-    public boolean shareLink(@CookieValue(name = "JSESSIONID") String cookieId, List<String> emails) {
+    public boolean shareLink(@CookieValue(name = "JSESSIONID") String cookieId, JSONArray emails) {
         return linkService.share(cookieId, emails);
     }
 
