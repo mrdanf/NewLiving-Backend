@@ -47,21 +47,22 @@ public class DienstleistungService {
 
             List<Angebot> angebots = angebotService.getAll();
 
-            String[] altLonLat = restService.getAdresseLonLat(nutzer.getAltPLZ(), nutzer.getAltAdresse());
+            for (Angebot angebot : angebots) {
+                String[] altLonLat = restService.getAdresseLonLat(nutzer.getAltPLZ(), nutzer.getAltAdresse());
 
-            String[] neuLonLat = restService.getAdresseLonLat(nutzer.getNeuPLZ(), nutzer.getNeuAdresse());
+                String[] neuLonLat = restService.getAdresseLonLat(nutzer.getNeuPLZ(), nutzer.getNeuAdresse());
 
-            String[] routingInfo = restService.getRoutingInfo(altLonLat, neuLonLat);
+                String[] routingInfo = restService.getRoutingInfo(altLonLat, neuLonLat);
 
-            Double distanceInKm = Double.parseDouble(routingInfo[0]) / 1000;
-            Double durationInM = Double.parseDouble(routingInfo[1]) / 60;
-            Double kaution = angebots.get(0).getKaution();
+                Double distanceInKm = Double.parseDouble(routingInfo[0]) / 1000;
+                Double durationInH = Double.parseDouble(routingInfo[1]) / 3600;
+                Double kaution = angebots.get(0).getKaution();
 
-            Double gesamt = kaution + distanceInKm * angebots.get(0).getPreisProKilometer();
+                Double gesamt = kaution + distanceInKm * angebots.get(0).getPreisProKilometer();
 
-            angebots.get(0).setGesamtPreis(gesamt);
+                angebots.get(0).setGesamtPreis(gesamt);
+            }
 
-            // TODO, auch preisProStunde in PreisProMinute in ERM ändern
         }
 
         return null;
@@ -80,4 +81,18 @@ public class DienstleistungService {
         return false;
     }
 
+    public List<Dienstleistung> getByType(String cookieId, String art) {
+        // TODO
+        return null;
+    }
+
+    public List<Dienstleistung> getSorted(String cookieId, String art) {
+        // TODO
+        return null;
+    }
+
+    public boolean book(String cookieId, Long id) {
+        // TODO
+        return false;
+    }
 }
