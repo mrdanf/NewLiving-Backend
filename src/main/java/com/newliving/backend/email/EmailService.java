@@ -56,7 +56,7 @@ public class EmailService {
      */
     public String buildEmailRegistration(String name) {
         return  "<p>Hallo " + name + ",</p>" +
-                "<p>Vielen Dank für ihre Registrierung bei NewLiving!</p>" +
+                "<p>Vielen Dank für Ihre Registrierung bei NewLiving!</p>" +
                 "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren" +
                 ".</p>" +
                 "<p>NewLiving</p>";
@@ -71,7 +71,7 @@ public class EmailService {
      */
     public String buildEmailPasswortReset(String name, String tempPassword) {
         return "<p>Hallo " + name + ",</p>" +
-                "<p>Sie haben die Zurücksetzung ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
+                "<p>Sie haben die Zurücksetzung Ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
                 "folgendes:</p>" +
                 "<p>Neues Passwort: " + tempPassword + "</p>" +
                 "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>" +
