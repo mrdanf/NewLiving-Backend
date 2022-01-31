@@ -1,6 +1,8 @@
 package com.newliving.backend.eintrag;
 
 import com.newliving.backend.eintrag.request.CreateOrUpdateEintragRequest;
+import com.newliving.backend.link.helfer.Helfer;
+import com.newliving.backend.link.helfer.HelferRepository;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class EintragService {
 
     private final EintragRepository eintragRepository;
     private final NutzerService nutzerService;
+    private final HelferRepository helferRepository;
 
     /**
      * Holt alle Einträge, die zum eingeloggten Nutzer gehören.
@@ -177,4 +180,9 @@ public class EintragService {
         }
     }
 
+    public List<Helfer> getHelfer(String cookieId, Long id) {
+        Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
+        Eintrag eintrag = eintragRepository.findEintragByIdAndNutzer(id, nutzer).get();
+        return helferRepository.findAllByEintrag(eintrag);
+    }
 }

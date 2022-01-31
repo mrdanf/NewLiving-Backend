@@ -50,8 +50,7 @@ public class EintragController {
      */
     @GetMapping("/helfer")
     public List<Helfer> getEintragHelfer(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id) {
-        // TODO
-        return null;
+        return eintragService.getHelfer(cookieId, id);
     }
 
     /**
