@@ -1,6 +1,5 @@
 package com.newliving.backend.dienstleistung;
 
-import com.newliving.backend.dienstleistung.angebot.Angebot;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class DienstleistungController {
      * @return Liste von allen Dienstleistungen
      */
     @GetMapping("")
-    public List<Angebot> getAllDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId) {
+    public List<Dienstleistung> getAllDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId) {
         return dienstleistungService.getAll(cookieId);
     }
 
@@ -35,7 +34,7 @@ public class DienstleistungController {
      * @return Dienstleistung mit entsprechender Id
      */
     @GetMapping("/id")
-    public Angebot getAllDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId,
+    public Dienstleistung getDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId,
                                               @RequestParam Long id) {
         return dienstleistungService.getOne(cookieId, id);
     }

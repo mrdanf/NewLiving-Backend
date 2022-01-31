@@ -1,5 +1,7 @@
 package com.newliving.backend;
 
+import com.newliving.backend.dienstleistung.Dienstleistung;
+import com.newliving.backend.dienstleistung.DienstleistungRepository;
 import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.eintrag.EintragRepository;
 import com.newliving.backend.nutzer.Nutzer;
@@ -20,7 +22,8 @@ public class StartDataConfig {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Bean
-    CommandLineRunner appUserCLR(NutzerRepository nutzerRepository, EintragRepository eintragRepository) {
+    CommandLineRunner appUserCLR(NutzerRepository nutzerRepository, EintragRepository eintragRepository,
+                                 DienstleistungRepository dienstleistungRepository) {
         return args -> {
 
             // Nutzer
@@ -83,8 +86,47 @@ public class StartDataConfig {
                     nutzers.get(0)
             ));
 
-
             eintragRepository.saveAll(eintrags);
+
+            // Dienstleistung
+            List<Dienstleistung> dienstleistungs = new ArrayList<>();
+            dienstleistungs.add(new Dienstleistung(
+                    "Autoverleih Speed",
+                    "32584 Löhne, Herforder Straße 32",
+                    "Anhänger",
+                    50.00,
+                    0.20,
+                    2.0
+            ));
+
+            dienstleistungs.add(new Dienstleistung(
+                    "Autoverleih Speed",
+                    "32584 Löhne, Herforder Straße 32",
+                    "Transporter",
+                    150.00,
+                    0.22,
+                    8.0
+            ));
+
+            dienstleistungs.add(new Dienstleistung(
+                    "Möbel Gustav",
+                    "32545 Bad Oeynhausen, Hahnenkampstraße 27",
+                    "Anhänger",
+                    30.00,
+                    0.27,
+                    2.75
+            ));
+
+            dienstleistungs.add(new Dienstleistung(
+                    "Möbel Gustav",
+                    "32545 Bad Oeynhausen, Hahnenkampstraße 27",
+                    "Transporter",
+                    100.00,
+                    0.30,
+                    9.30
+            ));
+
+            dienstleistungRepository.saveAll(dienstleistungs);
         };
 
     }

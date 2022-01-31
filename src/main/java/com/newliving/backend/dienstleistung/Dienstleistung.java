@@ -25,4 +25,28 @@ public class Dienstleistung {
 
     @Column(nullable = false)
     private String anschrift;
+
+    @Column(nullable = false)
+    private String typ;
+
+    @Column(nullable = false)
+    private Double kaution;
+
+    @Column(nullable = false)
+    private Double preisProKilometer;
+
+    @Column(nullable = false)
+    private Double preisProStunde;
+
+    private Double gesamtPreis;
+
+    public Dienstleistung(String name, String anschrift, String typ, Double kaution, Double preisProKilometer,
+                          Double preisProStunde) {
+        this.name = name;
+        this.anschrift = anschrift;
+        this.typ = typ;
+        this.kaution = kaution;
+        this.preisProKilometer = preisProKilometer;
+        this.preisProStunde = preisProStunde;
+    }
 }
