@@ -1,5 +1,7 @@
 package com.newliving.backend.email;
 
+import com.newliving.backend.dienstleistung.Dienstleistung;
+import com.newliving.backend.nutzer.Nutzer;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,12 +55,9 @@ public class EmailService {
      * @return Emailtext
      */
     public String buildEmailRegistration(String name) {
-        return  "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hallo " + name + ",</p>" +
-                "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Vielen Dank für ihre Registrierung.</p>" +
-                "<blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\">" +
-                "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"></p></blockquote>\n" +
-                "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren.</p>"
-                ;
+        return  "<p>Hallo " + name + ",</p>" +
+                "<p>Vielen Dank für ihre Registrierung bei NewLiving!</p>" +
+                "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren.</p>";
     }
 
     /**
@@ -72,7 +71,7 @@ public class EmailService {
         return "<p>Hallo " + name + ",</p>" +
                 "<p>Sie haben die Zurücksetzung ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
                 "folgendes:</p>" +
-                "<p>Neues Passwort: " + tempPassword + " </p>" +
+                "<p>Neues Passwort: " + tempPassword + "</p>" +
                 "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>";
     }
 
@@ -82,5 +81,29 @@ public class EmailService {
                 "wenn Sie die Umzugsplanung Ihres Freundes einsehen möchten:</p>" +
                 "<p><a href=\"" + link + "\">Umzugsplanung ansehen</a> </p>" +
                 "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>";
+    }
+
+    public String buildEmailBook(String name, Dienstleistung dienstleistung) {
+        String dName = dienstleistung.getName();
+        String dAnschrift = dienstleistung.getAnschrift();
+        String dTyp = dienstleistung.getTyp();
+        Double dKaution = dienstleistung.getKaution();
+        Double dPPK = dienstleistung.getPreisProKilometer();
+        Double dPPS = dienstleistung.getPreisProStunde();
+        Double dGesamt = dienstleistung.getGesamtPreis();
+
+        return "<p>Hallo " + name + ",</p>" +
+                "<p>Wir schicken Ihnen hiermit die Bestätigung der Buchung einer Dienstleistung zu:</p>" +
+                "<p>" +
+                dName + "</br>" +
+                dAnschrift + "</br>" +
+                "Typ: " + dTyp + "</br>" +
+                "Kaution: " + dKaution + " €</br>" +
+                "Preis pro Kilometer: " + dPPK + " €</br>" +
+                "Preis pro Stunde: " + dPPS + " €</br>" +
+                "Geschätzter Gesamtpreis: " + dGesamt + " €" +
+                "</p>" +
+                "<p>Wir danken Ihnen für die Nutzung unseres Service und wünschen Ihnen einen angenehmen Umzug!</p>" +
+                "<p>NewLiving</p>";
     }
 }

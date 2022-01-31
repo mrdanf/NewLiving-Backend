@@ -88,7 +88,8 @@ public class NutzerService {
      * @param nutzer Nutzer, bei dem Passwort zurückgesetzt wird
      */
     public void resetPasswort(Nutzer nutzer) {
-        nutzerRepository.updatePasswortById(nutzer.getId(), nutzer.getPasswort());
+        String passwortEncoded = bCryptPasswordEncoder.encode(nutzer.getPasswort());
+        nutzerRepository.updatePasswortById(nutzer.getId(), passwortEncoded);
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.newliving.backend.dienstleistung;
 
 import com.newliving.backend.dienstleistung.osm.RestService;
+import com.newliving.backend.email.EmailService;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import com.newliving.backend.nutzer.login.CheckLoginService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ public class DienstleistungService {
     private final CheckLoginService checkLoginService;
     private final NutzerService nutzerService;
     private final RestService restService;
+    private final EmailService emailService;
 
     /**
      * Liefert eine Liste von allen Dienstleistungen zurück, wenn der Nutzer eingeloggt ist.
@@ -45,6 +48,7 @@ public class DienstleistungService {
             List<Dienstleistung> dienstleistungs = dienstleistungRepository.findAll();
 
             calculateGesamtPreis(nutzer, dienstleistungs);
+            sortByGesamtPreis(dienstleistungs);
 
             return dienstleistungs;
         }
@@ -53,7 +57,107 @@ public class DienstleistungService {
     }
 
     public Dienstleistung getOne(String cookieId, Long id) {
+        if (checkLoginService.checkLoggedIn(cookieId)) {
+            Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
+            if (isAddressEmpty(nutzer)) {
+                return null;
+            }
+
+            return dienstleistungRepository.findById(id).get();
+
+        }
         return null;
+    }
+
+    public List<Dienstleistung> getByType(String cookieId, String art) {
+        if (checkLoginService.checkLoggedIn(cookieId)) {
+            Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
+            if (isAddressEmpty(nutzer)) {
+                return null;
+            }
+
+            List<Dienstleistung> dienstleistungsByType = null;
+            if (art.equalsIgnoreCase("anhänger")) {
+                dienstleistungsByType = dienstleistungRepository.findAllByTypContaining("Anhänger");
+            } else if (art.equalsIgnoreCase("transporter")) {
+                dienstleistungsByType = dienstleistungRepository.findAllByTypContaining("Transporter");
+            }
+
+            calculateGesamtPreis(nutzer, dienstleistungsByType);
+            sortByGesamtPreis(dienstleistungsByType);
+
+            return dienstleistungsByType;
+        }
+
+        return null;
+    }
+
+    public List<Dienstleistung> getSorted(String cookieId, String art) {
+        if (checkLoginService.checkLoggedIn(cookieId)) {
+            Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
+            if (isAddressEmpty(nutzer)) {
+                return null;
+            }
+
+            List<Dienstleistung> dienstleistungsSorted = dienstleistungRepository.findAll();
+            calculateGesamtPreis(nutzer, dienstleistungsSorted);
+
+            if (art.equalsIgnoreCase("gesamt")) {
+                sortByGesamtPreis(dienstleistungsSorted);
+            } else if (art.equalsIgnoreCase("kilometer")) {
+                dienstleistungsSorted.sort(new Comparator<Dienstleistung>() {
+                    @Override
+                    public int compare(Dienstleistung o1, Dienstleistung o2) {
+                        Double o1PreisProKilometer = o1.getPreisProKilometer();
+                        Double o2PreisProKilometer = o2.getPreisProKilometer();
+
+                        return o1PreisProKilometer.compareTo(o2PreisProKilometer);
+                    }
+                });
+            } else if (art.equalsIgnoreCase("stunde")) {
+                dienstleistungsSorted.sort(new Comparator<Dienstleistung>() {
+                    @Override
+                    public int compare(Dienstleistung o1, Dienstleistung o2) {
+                        Double o1PreisProStunde = o1.getPreisProStunde();
+                        Double o2PreisProStunde = o2.getPreisProStunde();
+
+                        return o1PreisProStunde.compareTo(o2PreisProStunde);
+                    }
+                });
+            }
+
+            return dienstleistungsSorted;
+        }
+        return null;
+    }
+
+    private void sortByGesamtPreis(List<Dienstleistung> dienstleistungsSorted) {
+        dienstleistungsSorted.sort(new Comparator<Dienstleistung>() {
+            @Override
+            public int compare(Dienstleistung o1, Dienstleistung o2) {
+                Double o1Gesamt = o1.getGesamtPreis();
+                Double o2Gesamt = o2.getGesamtPreis();
+
+                return o1Gesamt.compareTo(o2Gesamt);
+            }
+        });
+    }
+
+    public boolean book(String cookieId, Long id) {
+        if (checkLoginService.checkLoggedIn(cookieId)) {
+            Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
+            if (isAddressEmpty(nutzer)) {
+                return false;
+            }
+
+            Dienstleistung dienstleistung = dienstleistungRepository.findById(id).get();
+            calculateGesamtPreis(nutzer, List.of(dienstleistung));
+            emailService.send(nutzer.getEmail(), emailService.buildEmailBook(nutzer.getName(), dienstleistung));
+
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isAddressEmpty(Nutzer nutzer) {
@@ -66,29 +170,6 @@ public class DienstleistungService {
             // Keine Kontaktdaten angegeben
             return true;
         }
-        return false;
-    }
-
-    public List<Dienstleistung> getByType(String cookieId, String art) {
-        // TODO
-        if (art.equalsIgnoreCase("anhänger")) {
-            System.out.println("ANHÄNGER ignore case");
-        }
-        return null;
-    }
-
-    public List<Dienstleistung> getSorted(String cookieId, String art) {
-        // TODO
-        if (art.equalsIgnoreCase("gesamt")) {
-            System.out.println("gesamt ignore case");
-        } else if (art.equalsIgnoreCase("kilometer")) {
-            System.out.println("KILOMETER IGNORE CASE");
-        }
-        return null;
-    }
-
-    public boolean book(String cookieId, Long id) {
-        // TODO
         return false;
     }
 
