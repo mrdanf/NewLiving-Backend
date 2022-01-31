@@ -6,6 +6,8 @@ import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.eintrag.EintragRepository;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerRepository;
+import com.newliving.backend.tipp.Tipp;
+import com.newliving.backend.tipp.TippRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +25,7 @@ public class StartDataConfig {
 
     @Bean
     CommandLineRunner appUserCLR(NutzerRepository nutzerRepository, EintragRepository eintragRepository,
-                                 DienstleistungRepository dienstleistungRepository) {
+                                 DienstleistungRepository dienstleistungRepository, TippRepository tippRepository) {
         return args -> {
 
             // Nutzer
@@ -96,7 +98,7 @@ public class StartDataConfig {
                     "Anhänger",
                     50.00,
                     0.20,
-                    2.0
+                    5.0
             ));
 
             dienstleistungs.add(new Dienstleistung(
@@ -104,8 +106,8 @@ public class StartDataConfig {
                     "32584 Löhne, Herforder Straße 32",
                     "Transporter",
                     150.00,
-                    0.22,
-                    8.0
+                    0.32,
+                    13.50
             ));
 
             dienstleistungs.add(new Dienstleistung(
@@ -114,7 +116,7 @@ public class StartDataConfig {
                     "Anhänger",
                     30.00,
                     0.27,
-                    2.75
+                    3.75
             ));
 
             dienstleistungs.add(new Dienstleistung(
@@ -123,10 +125,59 @@ public class StartDataConfig {
                     "Transporter",
                     100.00,
                     0.30,
-                    9.30
+                    11.30
+            ));
+
+            dienstleistungs.add(new Dienstleistung(
+                    "Baustoffe Meyer",
+                    "32427 Minden, Marienstraße 35",
+                    "Anhänger",
+                    40.00,
+                    0.15,
+                    4.50
+            ));
+
+            dienstleistungs.add(new Dienstleistung(
+                    "Baustoffe Meyer",
+                    "32427 Minden, Marienstraße 35",
+                    "Transporter",
+                    80.00,
+                    0.35,
+                    9.50
             ));
 
             dienstleistungRepository.saveAll(dienstleistungs);
+
+            // Tipp
+            List<Tipp> tipps = new ArrayList<>();
+            tipps.add(new Tipp(
+                    "Geschirr einpacken",
+                    "Beim Geschirr einpacken muss man sehr vorsichtig sein. Da Geschirr meistens aus Porzellan und " +
+                            "Glas besteht, muss man darauf achten, dass das Geschirr nicht beim Umzug zerbricht. Um " +
+                            "das besser zu verhindern, sollte man das Geschirr immer in schützendes Material " +
+                            "einwickeln. Dazu kann man Handtücher oder Zeitungspapier verwenden. Zeitungspapier ist " +
+                            "optimal, da es ein gutes Verpackungsmaterial ist, welches oft sowieso jede Woche " +
+                            "kostenlos im Briefkasten liegt."
+            ));
+
+            tipps.add(new Tipp(
+                    "Große Müllbeutel bereitlegen",
+                    "Bei einem Umzug fällt immer sehr viel Müll an, auch wenn man nicht viel neue Möbel oder " +
+                            "Gegenstände dazu kauft. Oft sind es aussortierte alte Gegenstände, die z.B. kaputt sind " +
+                            "oder nicht mehr gebraucht werden. Verpackungsmaterial von z.B. Geschirr häuft sich auch " +
+                            "an, sowie Kreppband für Möbel oder Plastiktüten. Manchmal steht in der neuen Wohnung der" +
+                            " Mülleimer noch nicht bereit, daher können Müllbeutel auch normalen Haushaltsmüll fürs " +
+                            "erste entsorgen."
+            ));
+
+            tipps.add(new Tipp(
+                    "Kartons beschriften",
+                    "Um den Überblick über die gepackten Kartons zu behalten, sollten Kartons immer beschriftet " +
+                            "werden. Dazu kann man z.B. einen Karton mit \"Küche, Geschirr\" oder \"Wohnzimmer: " +
+                            "Sideboard\" beschriften. Dadurch wissen alle Helfer sofort, in welchen Raum der Karton " +
+                            "muss, außerdem ist das auspacken und einräumen der Kartons sehr viel einfacher."
+            ));
+
         };
 
     }

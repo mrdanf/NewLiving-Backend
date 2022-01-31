@@ -1,7 +1,6 @@
 package com.newliving.backend.email;
 
 import com.newliving.backend.dienstleistung.Dienstleistung;
-import com.newliving.backend.nutzer.Nutzer;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
