@@ -152,30 +152,23 @@ public class StartDataConfig {
             List<Tipp> tipps = new ArrayList<>();
             tipps.add(new Tipp(
                     "Geschirr einpacken",
-                    "Beim Geschirr einpacken muss man sehr vorsichtig sein. Da Geschirr meistens aus Porzellan und " +
-                            "Glas besteht, muss man darauf achten, dass das Geschirr nicht beim Umzug zerbricht. Um " +
-                            "das besser zu verhindern, sollte man das Geschirr immer in schützendes Material " +
-                            "einwickeln. Dazu kann man Handtücher oder Zeitungspapier verwenden. Zeitungspapier ist " +
-                            "optimal, da es ein gutes Verpackungsmaterial ist, welches oft sowieso jede Woche " +
-                            "kostenlos im Briefkasten liegt."
+                    "Geschirr zerbricht leicht, also sollte man es immer in Verpackungsmaterial einpacken. Dafür " +
+                            "bietet sich Zeitungspapier perfekt an, da es auch kostenlos wöchentlich kommt. Einfach " +
+                            "ein oder zweilagig einwickeln und nicht zu voll in Kartons packen."
             ));
 
             tipps.add(new Tipp(
                     "Große Müllbeutel bereitlegen",
-                    "Bei einem Umzug fällt immer sehr viel Müll an, auch wenn man nicht viel neue Möbel oder " +
-                            "Gegenstände dazu kauft. Oft sind es aussortierte alte Gegenstände, die z.B. kaputt sind " +
-                            "oder nicht mehr gebraucht werden. Verpackungsmaterial von z.B. Geschirr häuft sich auch " +
-                            "an, sowie Kreppband für Möbel oder Plastiktüten. Manchmal steht in der neuen Wohnung der" +
-                            " Mülleimer noch nicht bereit, daher können Müllbeutel auch normalen Haushaltsmüll fürs " +
-                            "erste entsorgen."
+                    "Beim Einpacken und Auspacken wird immer viel Müll produziert. Der normale Mülleimer reicht dafür" +
+                            " meistens nicht aus. Große Müllbeutel können in jeden Raum gelegt werden, um auch den " +
+                            "Weg zum Mülleimer zu ersparen."
             ));
 
             tipps.add(new Tipp(
                     "Kartons beschriften",
-                    "Um den Überblick über die gepackten Kartons zu behalten, sollten Kartons immer beschriftet " +
-                            "werden. Dazu kann man z.B. einen Karton mit \"Küche, Geschirr\" oder \"Wohnzimmer: " +
-                            "Sideboard\" beschriften. Dadurch wissen alle Helfer sofort, in welchen Raum der Karton " +
-                            "muss, außerdem ist das auspacken und einräumen der Kartons sehr viel einfacher."
+                    "Für einen guten Überblick beschriftet man einfach die Kartons. Das kann so aussehen: " +
+                            "\"Wohnzimmer: Sideboard\". Dann weiß jeder sofort, in welchen Raum der Karton muss, und " +
+                            "das Auspacken geht viel einfacher und schneller."
             ));
 
             tippRepository.saveAll(tipps);
