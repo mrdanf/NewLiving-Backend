@@ -178,6 +178,7 @@ public class StartDataConfig {
                             "muss, außerdem ist das auspacken und einräumen der Kartons sehr viel einfacher."
             ));
 
+            tippRepository.saveAll(tipps);
         };
 
     }
