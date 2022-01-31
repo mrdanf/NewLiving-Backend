@@ -8,6 +8,7 @@ import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +32,15 @@ public class EintragService {
      */
     public List<Eintrag> getAll(String cookieId) {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
-        return eintragRepository.findAllByNutzer(nutzer);
+        List<Eintrag> eintrags = eintragRepository.findAllByNutzer(nutzer);
+
+        eintrags.sort(new Comparator<Eintrag>() {
+            @Override
+            public int compare(Eintrag o1, Eintrag o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        });
+        return eintrags;
     }
 
     /**
