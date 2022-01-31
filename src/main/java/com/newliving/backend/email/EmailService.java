@@ -57,7 +57,9 @@ public class EmailService {
     public String buildEmailRegistration(String name) {
         return  "<p>Hallo " + name + ",</p>" +
                 "<p>Vielen Dank für ihre Registrierung bei NewLiving!</p>" +
-                "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren.</p>";
+                "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren" +
+                ".</p>" +
+                "<p>NewLiving</p>";
     }
 
     /**
@@ -72,7 +74,8 @@ public class EmailService {
                 "<p>Sie haben die Zurücksetzung ihres Passworts beantragt. Ihr Passwort wurde zurückgesetzt auf " +
                 "folgendes:</p>" +
                 "<p>Neues Passwort: " + tempPassword + "</p>" +
-                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>";
+                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>" +
+                "<p>NewLiving</p>";
     }
 
     public String buildEmailInvitation(String name, String link) {
@@ -80,7 +83,8 @@ public class EmailService {
                 "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach diesem Link, " +
                 "wenn Sie die Umzugsplanung Ihres Freundes einsehen möchten:</p>" +
                 "<p><a href=\"" + link + "\">Umzugsplanung ansehen</a> </p>" +
-                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>";
+                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>" +
+                "<p>NewLiving</p>";
     }
 
     public String buildEmailBook(String name, Dienstleistung dienstleistung) {
