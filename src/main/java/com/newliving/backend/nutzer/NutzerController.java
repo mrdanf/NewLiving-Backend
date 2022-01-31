@@ -31,7 +31,7 @@ public class NutzerController {
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param request Request: altPasswort, neuPasswort
-     * @return
+     * @return true wenn eingeloggt, sonst exception
      */
     @PutMapping("/update-passwort")
     public boolean updatePasswort(@CookieValue(name = "JSESSIONID") String cookieId,
@@ -44,12 +44,23 @@ public class NutzerController {
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param request Request: name, email, altPLZ, altAdresse, neuPLZ, neuAdresse, iban
-     * @return
+     * @return true, wenn eingeloggt und neue Email nicht vergeben, sonst false, wenn nicht eingeloggt exception
      */
     @PutMapping("/update-daten")
     public boolean updateDaten(@CookieValue(name = "JSESSIONID") String cookieId,
                               @RequestBody UpdateDatenRequest request) {
         return nutzerService.updateDaten(cookieId, request);
+    }
+
+    /**
+     * Schnittstelle zum Löschen des eigenen Accounts.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @return true wenn eingeloggt, sonst exception
+     */
+    @DeleteMapping("/löschen")
+    public boolean deleteAccount(@CookieValue(name = "JSESSIONID") String cookieId) {
+        return nutzerService.delete(cookieId);
     }
 
 }

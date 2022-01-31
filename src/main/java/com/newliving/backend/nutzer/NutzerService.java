@@ -200,4 +200,11 @@ public class NutzerService {
     public Nutzer getNutzerByLink(String link_id) {
         return nutzerRepository.findNutzerByLink(link_id).get();
     }
+
+    public boolean delete(String cookieId) {
+        Nutzer nutzer = getNutzerByCookie(cookieId);
+        nutzerRepository.delete(nutzer);
+
+        return true;
+    }
 }

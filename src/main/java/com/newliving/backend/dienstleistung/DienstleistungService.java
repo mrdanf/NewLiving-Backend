@@ -65,6 +65,10 @@ public class DienstleistungService {
         return null;
     }
 
+    public Angebot getOne(String cookieId, Long id) {
+        return null;
+    }
+
     private boolean isAddressEmpty(Nutzer nutzer) {
         String altPLZ = nutzer.getAltPLZ();
         String altAdresse = nutzer.getAltAdresse();
@@ -80,11 +84,19 @@ public class DienstleistungService {
 
     public List<Dienstleistung> getByType(String cookieId, String art) {
         // TODO
+        if (art.equalsIgnoreCase("anhänger")) {
+            System.out.println("ANHÄNGER ignore case");
+        }
         return null;
     }
 
     public List<Dienstleistung> getSorted(String cookieId, String art) {
         // TODO
+        if (art.equalsIgnoreCase("gesamt")) {
+            System.out.println("gesamt ignore case");
+        } else if (art.equalsIgnoreCase("kilometer")) {
+            System.out.println("KILOMETER IGNORE CASE");
+        }
         return null;
     }
 

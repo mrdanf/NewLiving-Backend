@@ -74,7 +74,13 @@ public class EintragService {
      */
     public boolean create(String cookieId, CreateOrUpdateEintragRequest request) {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
-        Eintrag eintrag = new Eintrag(request.getText(), request.getDatum(), nutzer);
+
+        String datum = null;
+        if (request.getDatum() != null) {
+            datum = request.getDatum();
+        }
+
+        Eintrag eintrag = new Eintrag(request.getText(), datum, nutzer);
         eintragRepository.save(eintrag);
         return true;
     }

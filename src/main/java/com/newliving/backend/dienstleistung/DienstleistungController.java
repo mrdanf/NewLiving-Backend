@@ -28,15 +28,28 @@ public class DienstleistungController {
     }
 
     /**
+     * Schnittstelle um eine Dienstleistung anzuzeigen.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param id Id der Dienstleistung
+     * @return Dienstleistung mit entsprechender Id
+     */
+    @GetMapping("/id")
+    public Angebot getAllDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId,
+                                              @RequestParam Long id) {
+        return dienstleistungService.getOne(cookieId, id);
+    }
+
+    /**
      * Schnittstelle um Dienstleistung nach Art gefiltert anzuzeigen. Filterung nach z.B. Anhänger oder Transporter
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
-     * @param art Art von Dienstleistung: anhänger | transporter
+     * @param art      Art von Dienstleistung: anhänger | transporter
      * @return gefilterte Liste von Dienstleistungen
      */
-    @GetMapping("/art/{art}")
+    @GetMapping("/art")
     public List<Dienstleistung> getAllDienstleistungByType(@CookieValue(name = "JSESSIONID") String cookieId,
-                                  @PathVariable String art) {
+                                                           @RequestParam String art) {
         return dienstleistungService.getByType(cookieId, art);
     }
 
@@ -45,13 +58,12 @@ public class DienstleistungController {
      * günstigster Stundenpreis, günstigster Kilometerpreis.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
-     * @param art Art der Sortierung: gesamt | stunde | kilometer
-     *
+     * @param art      Art der Sortierung: gesamt | stunde | kilometer
      * @return sortierte Liste von Dienstleistungen
      */
-    @GetMapping("/sortiert/{art}")
+    @GetMapping("/sortiert")
     public List<Dienstleistung> getAllDienstleistungSorted(@CookieValue(name = "JSESSIONID") String cookieId,
-                                              @PathVariable String art) {
+                                                           @RequestParam String art) {
         return dienstleistungService.getSorted(cookieId, art);
     }
 
@@ -59,12 +71,12 @@ public class DienstleistungController {
      * Schnittstelle um eine Dienstleistung zu buchen.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
-     * @param id Id von der gebuchten Dienstleistung
+     * @param id       Id von der gebuchten Dienstleistung
      * @return true, wenn Id vorhanden und Buchung erfolgreich, sonst exception
      */
-    @GetMapping("/id/{id}/buchen")
+    @GetMapping("/buchen")
     public boolean bookDienstleistung(@CookieValue(name = "JSESSIONID") String cookieId,
-                                              @PathVariable Long id) {
+                                      @RequestParam Long id) {
         return dienstleistungService.book(cookieId, id);
     }
 }

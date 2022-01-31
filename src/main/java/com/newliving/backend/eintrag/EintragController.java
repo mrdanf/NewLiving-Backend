@@ -1,6 +1,7 @@
 package com.newliving.backend.eintrag;
 
 import com.newliving.backend.eintrag.request.CreateOrUpdateEintragRequest;
+import com.newliving.backend.link.helfer.Helfer;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,9 +36,22 @@ public class EintragController {
      * @param id Id des Eintrags
      * @return Eintrag, sonst exception
      */
-    @GetMapping("/id/{id}")
-    public Eintrag getEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
+    @GetMapping("/id")
+    public Eintrag getEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id) {
         return eintragService.getOne(cookieId, id);
+    }
+
+    /**
+     * Schnittstelle um eingetragene Helfer eines Eintrags zu laden.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param id Id des Eintrags
+     * @return Liste von Helfer, sonst exception
+     */
+    @GetMapping("/helfer")
+    public List<Helfer> getEintragHelfer(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id) {
+        // TODO
+        return null;
     }
 
     /**
@@ -61,8 +75,8 @@ public class EintragController {
      * @return true wenn eingeloggt und Eintrag existiert, sonst exception wenn nicht eingeloggt oder false wenn
      * nicht authentifiziert
      */
-    @GetMapping("/id/{id}/erledigt")
-    public boolean switchEintragErledigt(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
+    @GetMapping("/erledigt")
+    public boolean switchEintragErledigt(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id) {
         return eintragService.switchErledigt(cookieId, id);
     }
 
@@ -75,8 +89,8 @@ public class EintragController {
      * @return true wenn eingeloggt und Datum korrekt, sonst exception wenn nicht eingeloggt oder false wenn nicht
      * authentifiziert
      */
-    @PutMapping("/id/{id}/update")
-    public boolean updateEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id,
+    @PutMapping("/update")
+    public boolean updateEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id,
                                  @RequestBody CreateOrUpdateEintragRequest request) {
         return eintragService.update(cookieId, id, request);
     }
@@ -89,8 +103,8 @@ public class EintragController {
      * @return true wenn eingeloggt und Eintrag vorhanden, sonst exception wenn nicht eingeloggt oder false wenn
      * nicht authentifiziert
      */
-    @DeleteMapping("/id/{id}/löschen")
-    public boolean deleteEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @PathVariable Long id) {
+    @DeleteMapping("/löschen")
+    public boolean deleteEintrag(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam Long id) {
         return eintragService.delete(cookieId, id);
     }
 

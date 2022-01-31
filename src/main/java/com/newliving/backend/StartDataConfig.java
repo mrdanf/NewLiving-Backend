@@ -36,6 +36,8 @@ public class StartDataConfig {
                     "DE0998753123"
             ));
 
+            nutzers.get(0).setLink("maxmustertestlink");
+
             nutzers.add(new Nutzer(
                     "peter@gmail.com",
                     "Peter Petermann",
