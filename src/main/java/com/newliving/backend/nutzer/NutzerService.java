@@ -148,13 +148,13 @@ public class NutzerService {
         Nutzer nutzer = getNutzerByCookie(cookieId);
         String neuEmail = request.getEmail();
         if (nutzerRepository.findByEmail(neuEmail).isEmpty()) {
-            String name = nutzer.getName();
-            String email = nutzer.getEmail();
-            String altPLZ = nutzer.getAltPLZ();
-            String altAdresse = nutzer.getAltAdresse();
-            String neuPLZ = nutzer.getNeuPLZ();
-            String neuAdresse = nutzer.getNeuAdresse();
-            String iban = nutzer.getIban();
+            String name = request.getName();
+            String email = request.getEmail();
+            String altPLZ = request.getAltPLZ();
+            String altAdresse = request.getAltAdresse();
+            String neuPLZ = request.getNeuPLZ();
+            String neuAdresse = request.getNeuAdresse();
+            String iban = request.getIban();
 
             if (!name.equals("")) {
                 nutzer.setName(name);

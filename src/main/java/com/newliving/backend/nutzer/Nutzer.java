@@ -22,7 +22,6 @@ public class Nutzer {
     private Long id;
 
     @Column(nullable = false)
-    @NaturalId
     private String email;
 
     @Column(nullable = false)
