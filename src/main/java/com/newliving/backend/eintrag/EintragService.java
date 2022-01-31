@@ -34,12 +34,7 @@ public class EintragService {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
         List<Eintrag> eintrags = eintragRepository.findAllByNutzer(nutzer);
 
-        eintrags.sort(new Comparator<Eintrag>() {
-            @Override
-            public int compare(Eintrag o1, Eintrag o2) {
-                return o1.getId().compareTo(o2.getId());
-            }
-        });
+        sort(eintrags);
         return eintrags;
     }
 
@@ -51,7 +46,19 @@ public class EintragService {
      */
     public List<Eintrag> getAllFriend(String link_id) {
         Nutzer nutzer = nutzerService.getNutzerByLink(link_id);
-        return eintragRepository.findAllByNutzer(nutzer);
+
+        List<Eintrag> eintrags = eintragRepository.findAllByNutzer(nutzer);
+        sort(eintrags);
+        return eintrags;
+    }
+
+    private void sort(List<Eintrag> eintrags) {
+        eintrags.sort(new Comparator<Eintrag>() {
+            @Override
+            public int compare(Eintrag o1, Eintrag o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        });
     }
 
     /**
