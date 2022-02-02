@@ -25,7 +25,7 @@ public class EmailService {
     /**
      * Baut eine MIME Email auf und versendet diese an den Nutzer.
      *
-     * Baut eine MIME Email auf mit Subject "Info von NewLiving" und Absender "info@newliving.com". Die Email geht an
+     * Baut eine MIME Email auf mit Subject "Info von New Living" und Absender "info@newliving.com". Die Email geht an
      * die übergebene Email Adresse eines Nutzers. Der Inhalt der Email wird an anderer Stelle erstellt und dieser
      * Methode übergeben.
      *
@@ -38,7 +38,7 @@ public class EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("Info von NewLiving");
+            helper.setSubject("Info von New Living");
             helper.setFrom("info@newliving.com");
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
@@ -58,7 +58,7 @@ public class EmailService {
                 "<p>Vielen Dank für Ihre Registrierung bei NewLiving!</p>" +
                 "<p>Falls Sie diese Registierung nicht vorgenommen haben, können Sie diese Email einfach ignorieren" +
                 ".</p>" +
-                "<p>NewLiving</p>";
+                "<p>New Living</p>";
     }
 
     /**
@@ -74,7 +74,7 @@ public class EmailService {
                 "folgendes:</p>" +
                 "<p>Neues Passwort: " + tempPassword + "</p>" +
                 "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>" +
-                "<p>NewLiving</p>";
+                "<p>New Living</p>";
     }
 
     /**
@@ -86,11 +86,10 @@ public class EmailService {
      */
     public String buildEmailInvitation(String name, String link) {
         return "<p>Hallo!</p>" +
-                "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach diesem Link, " +
-                "wenn Sie die Umzugsplanung Ihres Freundes einsehen möchten:</p>" +
-                "<p><a href=\"" + link + "\">Umzugsplanung ansehen</a> </p>" +
-                "<p>Wir empfehlen Ihnen, das Passwort nach der Anmeldung sofort zu ändern.</p>" +
-                "<p>NewLiving</p>";
+                "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach diesem Link und " +
+                "geben Sie den Code ein, wenn Sie die Umzugsplanung Ihres Freundes einsehen möchten:</p>" +
+                "<p>Code: " + link + "</p>" +
+                "<p>New Living</p>";
     }
 
     /**
@@ -121,6 +120,6 @@ public class EmailService {
                 "Geschätzter Gesamtpreis: " + dGesamt + " €" +
                 "</p>" +
                 "<p>Wir danken Ihnen für die Nutzung unseres Service und wünschen Ihnen einen angenehmen Umzug!</p>" +
-                "<p>NewLiving</p>";
+                "<p>New Living</p>";
     }
 }

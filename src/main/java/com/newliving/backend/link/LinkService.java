@@ -1,6 +1,5 @@
 package com.newliving.backend.link;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.eintrag.EintragService;
 import com.newliving.backend.email.EmailService;
@@ -12,7 +11,6 @@ import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
 import lombok.AllArgsConstructor;
 import net.bytebuddy.utility.RandomString;
-import net.minidev.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,22 +55,17 @@ public class LinkService {
     }
 
     /**
-     * Versendet den Freigabelink an verschiedene Empfänger per Email.
+     * Versendet den Freigabelink an einen Empfänger per Email.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
-     * @param emails Liste von Emails, an welche die Einladung gesendet werden soll
+     * @param email    Email, an welche die Einladung gesendet werden soll
      * @return true wenn eingeloggt, sonst exception
      */
-    public boolean share(String cookieId, JSONArray emails) {
+    public boolean share(String cookieId, String email) {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
         String linkId = nutzer.getLink();
 
-        String link = "http://localhost:8080/api/link/" + linkId;
-
-        for (int i = 0; i < emails.size(); i++) {
-            String to = emails.get(i).toString();
-            emailService.send(to, emailService.buildEmailInvitation(nutzer.getName(), link));
-        }
+        emailService.send(email, emailService.buildEmailInvitation(nutzer.getName(), linkId));
 
         return true;
     }

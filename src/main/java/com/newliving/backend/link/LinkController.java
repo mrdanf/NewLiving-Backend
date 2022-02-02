@@ -44,12 +44,12 @@ public class LinkController {
      * Schnittstelle um einen Link durch die App zu teilen.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
-     * @param emails Liste von Emails, an welche die Einladung gesendet werden soll
+     * @param email Email, an welche die Einladung gesendet werden soll
      * @return true wenn eingeloggt, sonst exception
      */
-    @PostMapping("/teilen")
-    public boolean shareLink(@CookieValue(name = "JSESSIONID") String cookieId, JSONArray emails) {
-        return linkService.share(cookieId, emails);
+    @GetMapping("/teilen")
+    public boolean shareLink(@CookieValue(name = "JSESSIONID") String cookieId, @RequestParam String email) {
+        return linkService.share(cookieId, email);
     }
 
     /**
