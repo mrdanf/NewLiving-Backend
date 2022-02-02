@@ -25,13 +25,17 @@ public class RestService {
     /**
      * Holt Längen- (Longitude) und Breitengrad (Latitude) der angefragten Adresse.
      *
-     * @param plz PLZ der Stadt
+     * @param plz    PLZ der Stadt
      * @param street Straße
      * @return String[] mit String[0] = longitude und String[1] = latitude
      */
     public String[] getAdresseLonLat(String plz, String street) {
         String url = "https://nominatim.openstreetmap.org/search/" + plz + " " + street + "?format=json&limit=1";
         JSONArray response = restTemplate.getForObject(url, JSONArray.class);
+
+        if (response == null) {
+            throw new IllegalStateException("Adresse existiert nicht!");
+        }
 
         String lon = getLon(response);
         String lat = getLat(response);
@@ -60,24 +64,40 @@ public class RestService {
     }
 
     private String getDistance(JSONObject response) {
-        ArrayList<LinkedHashMap<String, Object>> routes = (ArrayList<LinkedHashMap<String, Object>>) response.get("routes");
-        LinkedHashMap<String, Object> routesAt0 = routes.get(0);
-        return routesAt0.get("distance").toString();
+        try {
+            ArrayList<LinkedHashMap<String, Object>> routes = (ArrayList<LinkedHashMap<String, Object>>) response.get("routes");
+            LinkedHashMap<String, Object> routesAt0 = routes.get(0);
+            return routesAt0.get("distance").toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalStateException("Adresse existiert nicht!");
+        }
     }
 
     private String getDuration(JSONObject response) {
-        ArrayList<LinkedHashMap<String, Object>> routes = (ArrayList<LinkedHashMap<String, Object>>) response.get("routes");
-        LinkedHashMap<String, Object> routesAt0 = routes.get(0);
-        return routesAt0.get("duration").toString();
+        try {
+            ArrayList<LinkedHashMap<String, Object>> routes = (ArrayList<LinkedHashMap<String, Object>>) response.get("routes");
+            LinkedHashMap<String, Object> routesAt0 = routes.get(0);
+            return routesAt0.get("duration").toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalStateException("Adresse existiert nicht!");
+        }
     }
 
     private String getLon(JSONArray response) {
-        JSONObject object = new JSONObject((Map<String, ?>) response.get(0));
-        return object.getAsString("lon");
+        try {
+            JSONObject object = new JSONObject((Map<String, ?>) response.get(0));
+            return object.getAsString("lon");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalStateException("Adresse existiert nicht!");
+        }
     }
 
     private String getLat(JSONArray response) {
-        JSONObject object = new JSONObject((Map<String, ?>) response.get(0));
-        return object.getAsString("lat");
+        try {
+            JSONObject object = new JSONObject((Map<String, ?>) response.get(0));
+            return object.getAsString("lat");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalStateException("Adresse existiert nicht!");
+        }
     }
 }
