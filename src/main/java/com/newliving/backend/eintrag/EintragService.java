@@ -196,6 +196,13 @@ public class EintragService {
         }
     }
 
+    /**
+     * Sucht die eingetragenen Helfer zu einem Beitrag und liefert diese zurück.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param id Id des Eintrags
+     * @return Liste von Helfer, sonst exception
+     */
     public List<Helfer> getHelfer(String cookieId, Long id) {
         Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
         Eintrag eintrag = eintragRepository.findEintragByIdAndNutzer(id, nutzer).get();

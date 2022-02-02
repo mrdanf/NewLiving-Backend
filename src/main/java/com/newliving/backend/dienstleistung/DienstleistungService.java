@@ -56,6 +56,13 @@ public class DienstleistungService {
         return null;
     }
 
+    /**
+     * Liefert die angefragte Dienstleistung zurück, wenn der Nutzer eingeloggt ist.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param id Id der Dienstleistung
+     * @return Dienstleistung mit entsprechender Id
+     */
     public Dienstleistung getOne(String cookieId, Long id) {
         if (checkLoginService.checkLoggedIn(cookieId)) {
             Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
@@ -69,6 +76,13 @@ public class DienstleistungService {
         return null;
     }
 
+    /**
+     * Filtert die Dienstleistungen abhängig von der angegebenen Filterart. Überprüft erst den Loginstatus des Nutzers.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param art      Art von Dienstleistung: anhänger | transporter
+     * @return gefilterte Liste von Dienstleistungen
+     */
     public List<Dienstleistung> getByType(String cookieId, String art) {
         if (checkLoginService.checkLoggedIn(cookieId)) {
             Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
@@ -92,6 +106,13 @@ public class DienstleistungService {
         return null;
     }
 
+    /**
+     * Sortiert die Liste nach angegebener Sortierungsart. Überprüft erst den Loginstatus des Nutzers.
+     *
+     * @param cookieId Cookie vom eingeloggten Nutzer
+     * @param art      Art der Sortierung: gesamt | stunde | kilometer
+     * @return sortierte Liste von Dienstleistungen
+     */
     public List<Dienstleistung> getSorted(String cookieId, String art) {
         if (checkLoginService.checkLoggedIn(cookieId)) {
             Nutzer nutzer = nutzerService.getNutzerByCookie(cookieId);
@@ -142,6 +163,7 @@ public class DienstleistungService {
             }
         });
     }
+
 
     public boolean book(String cookieId, Long id) {
         if (checkLoginService.checkLoggedIn(cookieId)) {
@@ -200,7 +222,9 @@ public class DienstleistungService {
     }
 
     /**
-     * Rundet Double auf {places} stellen nach dem Komma. Von stackoverflow: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+     * Rundet Double auf {places} stellen nach dem Komma.
+     * Von Stackoverflow: https://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
+     * Credits: https://stackoverflow.com/users/56285/jonik
      *
      * @param value Double Wert der gerundet wird
      * @param places Anzahl an Stellen, auf die gerundet werden soll

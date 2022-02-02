@@ -12,7 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 /**
- * Versendet vorgefertigte Emails an Nutzer nach Registrierung oder Passwort zurücksetzen.
+ * Versendet vorgefertigte Emails an Nutzer und Helfer.
  */
 @Service
 @AllArgsConstructor
@@ -77,6 +77,13 @@ public class EmailService {
                 "<p>NewLiving</p>";
     }
 
+    /**
+     * Baut eine Email mit einem Freigabelink, um die Planung des Umziehenden einzusehen.
+     *
+     * @param name Der Name des Nutzers, der in der Email angesprochen werden soll
+     * @param link Freigabelink
+     * @return Emailtext
+     */
     public String buildEmailInvitation(String name, String link) {
         return "<p>Hallo!</p>" +
                 "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach diesem Link, " +
@@ -86,6 +93,13 @@ public class EmailService {
                 "<p>NewLiving</p>";
     }
 
+    /**
+     * Baut eine Email mit der Buchung einer Dienstleistung.
+     *
+     * @param name Der Name des Nutzers, der in der Email angesprochen werden soll
+     * @param dienstleistung die gebuchte Dienstleistung
+     * @return Emailtext
+     */
     public String buildEmailBook(String name, Dienstleistung dienstleistung) {
         String dName = dienstleistung.getName();
         String dAnschrift = dienstleistung.getAnschrift();

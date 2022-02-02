@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Stellt die Verbindung zu OpenStreetMap her und holt die Koordinaten und Routinginformationen.
+ */
 @Service
 public class RestService {
 
@@ -19,6 +22,13 @@ public class RestService {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    /**
+     * Holt Längen- (Longitude) und Breitengrad (Latitude) der angefragten Adresse.
+     *
+     * @param plz PLZ der Stadt
+     * @param street Straße
+     * @return String[] mit String[0] = longitude und String[1] = latitude
+     */
     public String[] getAdresseLonLat(String plz, String street) {
         String url = "https://nominatim.openstreetmap.org/search/" + plz + " " + street + "?format=json&limit=1";
         JSONArray response = restTemplate.getForObject(url, JSONArray.class);
@@ -29,6 +39,13 @@ public class RestService {
         return new String[]{lon, lat};
     }
 
+    /**
+     * Berechnet die optimale Route zwischen zwei Koordinatenpunkten. Liefert die Distanz und die Dauer zurück.
+     *
+     * @param altLonLat Startpunkt: erwartet String[0] = longitude und String[1] = latitude
+     * @param neuLonLat Endpunkt: erwartet String[0] = longitude und String[1] = latitude
+     * @return String[] mit String[0] = distance in Metern und String[1] = duration in Sekunden
+     */
     public String[] getRoutingInfo(String[] altLonLat, String[] neuLonLat) {
         String url = "https://routing.openstreetmap.de/routed-car/route/v1/driving/" +
                 altLonLat[0] + "," + altLonLat[1] + ";" +

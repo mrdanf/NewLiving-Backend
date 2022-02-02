@@ -1,13 +1,11 @@
 package com.newliving.backend.link;
 
-import com.newliving.backend.eintrag.Eintrag;
 import com.newliving.backend.link.request.GetListResponse;
 import com.newliving.backend.link.request.OfferHelpRequest;
 import lombok.AllArgsConstructor;
 import net.minidev.json.JSONArray;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * Schnittstellen für Features mit Link. Darin sind Erstellen eines Links, deaktivieren oder teilen, und auch bei

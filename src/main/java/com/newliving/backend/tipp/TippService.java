@@ -14,9 +14,7 @@ public class TippService {
     private final CheckLoginService checkLoginService;
 
     /**
-     * Liefert alle Tipps zurück, solange der Nutzer eingeloggt ist. Das hat den Grund, dass der Service nicht
-     * umsonst hilfreiche Tipps zusammensucht und für jede beliebige Person einsehbar sein soll, sondern nur für
-     * Nutzer von Umzugsplaner.
+     * Liefert alle Tipps zurück, solange der Nutzer eingeloggt ist.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @return Liste von Tipps, wenn ein Nutzer eingeloggt ist, sonst null

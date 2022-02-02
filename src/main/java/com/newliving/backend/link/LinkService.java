@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Verwaltet die Links, dazu gehört Erstellung, Teilen und Deaktivierung.
+ */
 @Service
 @AllArgsConstructor
 public class LinkService {
@@ -54,7 +57,7 @@ public class LinkService {
     }
 
     /**
-     * Versendet den Einladungslink an verschiedene Empfänger per Email.
+     * Versendet den Freigabelink an verschiedene Empfänger per Email.
      *
      * @param cookieId Cookie vom eingeloggten Nutzer
      * @param emails Liste von Emails, an welche die Einladung gesendet werden soll
@@ -78,6 +81,13 @@ public class LinkService {
         return RandomString.make(8);
     }
 
+    /**
+     * Holt die Planungsliste von dem Nutzer zugehörig zu dem Freigabelink. Fügt der Antwort noch den Namen des
+     * Nutzers an.
+     *
+     * @param link_id Id vom Link, welcher auf die geteilte Planung verweist
+     * @return Response: name, Liste von Einträgen
+     */
     public GetListResponse getAllEintragFriend(String link_id) {
         String name = nutzerService.getNutzerByLink(link_id).getName();
         List<Eintrag> eintragList = eintragService.getAllFriend(link_id);
