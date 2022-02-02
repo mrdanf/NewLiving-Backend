@@ -86,8 +86,9 @@ public class EmailService {
      */
     public String buildEmailInvitation(String name, String link) {
         return "<p>Hallo!</p>" +
-                "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach diesem Link und " +
-                "geben Sie den Code ein, wenn Sie die Umzugsplanung Ihres Freundes einsehen möchten:</p>" +
+                "<p>Ihr Freund " + name + " hat Sie zur Hilfe beim Umzug gebeten. Folgen Sie einfach " +
+                "<a href=\"http://localhost:8080\">diesem Link</a> und geben Sie den Code ein, wenn Sie die " +
+                "Umzugsplanung  Ihres Freundes einsehen möchten:</p>" +
                 "<p>Code: " + link + "</p>" +
                 "<p>New Living</p>";
     }
