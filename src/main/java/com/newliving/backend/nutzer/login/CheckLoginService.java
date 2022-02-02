@@ -32,7 +32,7 @@ public class CheckLoginService {
             // Cookie ist in der Datenbank vorhanden -> Nutzer ist eingeloggt
             return true;
         } else {
-            return false;
+            throw new IllegalStateException("Falsche Logindaten oder nicht erlaubter Zugriff!");
         }
     }
 }

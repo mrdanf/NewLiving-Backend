@@ -5,10 +5,8 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.2</version> <!-- Eigentlich: <version>2.6.2</version> , aber damit zeigt er die Exception
-		Messages beim Client nicht an -->
-		<!-- Beim letzten Projekt wurde deshalb eine andere Version genutzt: <version>2.4.1</version> -->
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.6.2</version>
+		<relativePath/>
 	</parent>
 	<groupId>com.newliving</groupId>
 	<artifactId>backend</artifactId>
