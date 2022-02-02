@@ -1,6 +1,7 @@
 package com.newliving.backend.link;
 
 import com.newliving.backend.eintrag.Eintrag;
+import com.newliving.backend.link.request.GetListResponse;
 import com.newliving.backend.link.request.OfferHelpRequest;
 import lombok.AllArgsConstructor;
 import net.minidev.json.JSONArray;
@@ -60,7 +61,7 @@ public class LinkController {
      * @return true wenn Link existiert, sonst exception
      */
     @GetMapping("/id/{link_id}")
-    public List<Eintrag> getAllEintragFriend(@PathVariable String link_id) {
+    public GetListResponse getAllEintragFriend(@PathVariable String link_id) {
         return linkService.getAllEintragFriend(link_id);
     }
 

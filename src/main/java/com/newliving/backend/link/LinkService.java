@@ -6,6 +6,7 @@ import com.newliving.backend.eintrag.EintragService;
 import com.newliving.backend.email.EmailService;
 import com.newliving.backend.link.helfer.Helfer;
 import com.newliving.backend.link.helfer.HelferRepository;
+import com.newliving.backend.link.request.GetListResponse;
 import com.newliving.backend.link.request.OfferHelpRequest;
 import com.newliving.backend.nutzer.Nutzer;
 import com.newliving.backend.nutzer.NutzerService;
@@ -77,8 +78,11 @@ public class LinkService {
         return RandomString.make(8);
     }
 
-    public List<Eintrag> getAllEintragFriend(String link_id) {
-        return eintragService.getAllFriend(link_id);
+    public GetListResponse getAllEintragFriend(String link_id) {
+        String name = nutzerService.getNutzerByLink(link_id).getName();
+        List<Eintrag> eintragList = eintragService.getAllFriend(link_id);
+        GetListResponse response = new GetListResponse(name, eintragList);
+        return response;
     }
 
     /**
